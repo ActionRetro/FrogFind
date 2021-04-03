@@ -13,7 +13,6 @@ if(isset( $_GET['q'])) { // if there's a search query, show the results for it
         $error_text .=  "Failed to get results, sorry :( <br>";
     }
     $simple_results=$results_html;
-    //$simple_results= strip_tags($results_html, '<a><ol><ul><li><br><p><small><font><b><strong><i><em><blockquote><h1><h2><h3><h4><h5><h6>');
     $simple_results = str_replace( 'strong>', 'b>', $simple_results ); //change <strong> to <b>
     $simple_results = str_replace( 'em>', 'i>', $simple_results ); //change <em> to <i>
     $simple_results = clean_str($simple_results);
@@ -39,17 +38,8 @@ if(isset( $_GET['q'])) { // if there's a search query, show the results for it
 
             $final_result_html .= "<br><a href='" . $result_link . "'><font size='4'><b>" . $result_title[0] . "</b></font><br><font color='#008000' size='2'>" 
                                 . $result_display_url . "</font></a><br>" . $result_snippet . "<br><br><hr>";
-
-            // if($x==$total_results) {
-            //     $last_result = explode('<div class="nav-link">', $result_blocks[$x]);
-            //     $final_result_html .= $last_result[0];
-            // } else {
-            //     $final_result_html .= $result_blocks[$x] . "<hr>";
-            // }
         }
-        
     }
-    //$final_result_html = str_replace( '//duckduckgo.com/l/?uddg=', '/read.php?a=', $final_result_html); 
 }
 
 //replace chars that old machines probably can't handle
