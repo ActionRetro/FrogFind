@@ -27,11 +27,20 @@ if (strpos($url, ".jpg") || strpos($url, ".jpeg") === true) {
     exit();
 }
 
-$dest_imagex = 300;
-$dest_imagey = 200;
+$raw_imagex = imagesx($raw_image);
+$raw_imagey = imagesy($raw_image);
+
+if ($raw_imagex >= $raw_imagey) {
+	$dest_imagex = 300;
+	$dest_imagey = ($raw_imagey / $raw_imagex) * $dest_imagex;
+} else {
+	$dest_imagey = 200;
+	$dest_imagex = ($raw_imagex / $raw_imagey) * $dest_imagey;
+}
+
 $dest_image = imagecreatetruecolor($dest_imagex, $dest_imagey);
 
-imagecopyresized($dest_image, $raw_image, 0, 0, 0, 0, $dest_imagex, $dest_imagey, imagesx($raw_image), imagesy($raw_image));
+imagecopyresampled($dest_image, $raw_image, 0, 0, 0, 0, $dest_imagex, $dest_imagey, $raw_imagex, $raw_imagey);
 
 header('Content-type: image/' . $filetype); 
 if ($filetype = "jpg") {
