@@ -47,7 +47,7 @@ try {
     $readable_article = str_replace( 'em>', 'i>', $readable_article ); //change <em> to <i>
     
     $readable_article = clean_str($readable_article);
-    $readable_article = str_replace( 'href="http', 'href="/read.php?a=http', $readable_article ); //route links through proxy
+    $readable_article = str_replace( 'href="http', 'href="./read.php?a=http', $readable_article ); //route links through proxy
     
 } catch (ParseException $e) {
     $error_text .= 'Sorry! ' . $e->getMessage() . '<br>';
@@ -73,8 +73,8 @@ function clean_str($str) {
  </head>
  <body>
     <p>
-        <form action="/read.php" method="get">
-        <a href="/">Back to <b><font color="#008000">Frog</font><font color="000000">Find!</font></a></b> | Browsing URL: <input type="text" size="38" name="a" value="<?php echo $article_url ?>">
+        <form action="./read.php" method="get">
+        <a href="./">Back to <b><font color="#008000">Frog</font><font color="000000">Find!</font></a></b> | Browsing URL: <input type="text" size="38" name="a" value="<?php echo $article_url ?>">
         <input type="submit" value="Go!">
         </form>
     </p>
