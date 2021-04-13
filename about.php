@@ -10,8 +10,8 @@
 </head>
 <body>
 
-    <form action="/" method="get">  
-    <a href="/"><font size=6 color="#008000">Frog</font><font size=6 color="#000000">Find!</font></a> Leap again: <input type="text" size="30" name="q" value="<?php echo urldecode($query) ?>">
+    <form action="./" method="get">  
+    <a href="./"><font size=6 color="#008000">Frog</font><font size=6 color="#000000">Find!</font></a> Leap again: <input type="text" size="30" name="q" value="<?php echo urldecode($query) ?>">
     <input type="submit" value="Ribbbit!">
     </form>
     <hr>

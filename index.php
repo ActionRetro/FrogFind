@@ -25,7 +25,7 @@ if(isset( $_GET['q'])) { // if there's a search query, show the results for it
             // result link, redirected through our proxy
             $result_link = explode('class="result__a" href="', $result_blocks[$x])[1];
             $result_topline = explode('">', $result_link);
-            $result_link = str_replace( '//duckduckgo.com/l/?uddg=', '/read.php?a=', $result_topline[0]);
+            $result_link = str_replace( '//duckduckgo.com/l/?uddg=', './read.php?a=', $result_topline[0]);
             // result title
             $result_title = str_replace("</a>","",explode("\n", $result_topline[1]));
             // result display url
@@ -66,8 +66,8 @@ function clean_str($str) {
 
 <?php if($show_results) { // there's a search query in q, so show search results ?>
 
-    <form action="/" method="get">
-    <a href="/"><font size=6 color="#008000">Frog</font><font size=6 color="#000000">Find!</font></a> Leap again: <input type="text" size="30" name="q" value="<?php echo urldecode($query) ?>">
+    <form action="./" method="get">
+    <a href="./"><font size=6 color="#008000">Frog</font><font size=6 color="#000000">Find!</font></a> Leap again: <input type="text" size="30" name="q" value="<?php echo urldecode($query) ?>">
     <input type="submit" value="Ribbbit!">
     </form>
     <hr>
@@ -81,7 +81,7 @@ function clean_str($str) {
     <center><h3>The Search Engine for Vintage Computers</h3></center>
     <br><br>
     <center>
-    <form action="/" method="get">
+    <form action="./" method="get">
     Leap to: <input type="text" size="30" name="q"><br>
     <input type="submit" value="Ribbbit!">
     </center>
