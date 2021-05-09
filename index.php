@@ -67,12 +67,12 @@ function clean_str($str) {
 <?php if($show_results) { // there's a search query in q, so show search results ?>
 
     <form action="/" method="get">
-    <a href="/"><font size=6 color="#008000">Frog</font><font size=6 color="#000000">Find!</font></a> Leap again: <input type="text" size="30" name="q" value="<?php echo urldecode($query) ?>">
+    <a href="/"><font size=6 color="#008000">Frog</font><font size=6 color="#000000">Find!</font></a> Leap again: <input type="text" size="30" name="q" value="<?php echo htmlspecialchars(urldecode($query), ENT_QUOTES, 'UTF-8') ?>">
     <input type="submit" value="Ribbbit!">
     </form>
     <hr>
     <br>
-    <center>Search Results for <b><?php echo strip_tags(urldecode($query)) ?></b></center>
+    <center>Search Results for <b><?php echo htmlspecialchars(urldecode($query), ENT_QUOTES, 'UTF-8') ?></b></center>
     <br>
     <?php echo $final_result_html ?>
     
