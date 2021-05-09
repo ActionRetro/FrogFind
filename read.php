@@ -7,7 +7,7 @@ $error_text = "";
 $loc = "US";
 
 if( isset( $_GET['loc'] ) ) {
-    $loc = strtoupper($_GET["loc"]);
+    $loc = urlencode(strtoupper($_GET["loc"]));
 }
 
 if( isset( $_GET['a'] ) ) {
@@ -74,7 +74,7 @@ function clean_str($str) {
  <body>
     <p>
         <form action="/read.php" method="get">
-        <a href="/">Back to <b><font color="#008000">Frog</font><font color="000000">Find!</font></a></b> | Browsing URL: <input type="text" size="38" name="a" value="<?php echo $article_url ?>">
+        <a href="/">Back to <b><font color="#008000">Frog</font><font color="000000">Find!</font></a></b> | Browsing URL: <input type="text" size="38" name="a" value="<?php echo htmlspecialchars($article_url, ENT_QUOTES, 'UTF-8') ?>">
         <input type="submit" value="Go!">
         </form>
     </p>
