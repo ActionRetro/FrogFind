@@ -4,7 +4,7 @@
     $loc = "US";
 
     if( isset( $_GET['loc'] ) ) {
-        $loc = strtoupper($_GET["loc"]);
+        $loc = urlencode(strtoupper($_GET["loc"]));
     }
     
     //get the image url
@@ -38,8 +38,8 @@
  </head>
  <body">
     <small><a href="<?php echo $_SERVER['HTTP_REFERER'] . '?loc=' . strtoupper($loc) ?>">< Back to article</a></small>
-    <p><small><b>Viewing image:</b> <?php echo $url ?></small></p>
-    <img src="/image_compressed.php?i=<?php echo $url; ?>">
+    <p><small><b>Viewing image:</b> <?php echo htmlspecialchars($url, ENT_QUOTES, 'UTF-8') ?></small></p>
+    <img src="/image_compressed.php?i=<?php echo urlencode($url); ?>">
     <br><br>
     <small><a href="<?php echo $_SERVER['HTTP_REFERER'] . '?loc=' . strtoupper($loc) ?>">< Back to article</a></small>
  </body>
