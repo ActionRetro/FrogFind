@@ -1,5 +1,24 @@
 <?php
 require_once('vendor/autoload.php');
+require_once('localization.php');
+
+// Locale things
+
+$locale = new Locale;
+$encoding = $locale->trRaw('encoding', $_GET['lg']);
+
+function tr($string) {
+    global $encoding;
+    global $locale;
+    return mb_convert_encoding($locale->trRaw($string, $_GET['lg']), $encoding, 'UTF-8');
+}
+
+function localeEncode($string) {
+    global $encoding;
+    return mb_convert_encoding($string, $encoding, 'UTF-8');
+}
+
+header('Content-Type: text/html;charset='.$encoding);
 
 $article_url = "";
 $article_html = "";
@@ -18,7 +37,7 @@ if( isset( $_GET['a'] ) ) {
 }
 
 if (substr( $article_url, 0, 4 ) != "http") {
-    echo("That's not a web page :(");
+    echo(tr("error_not_webpage"));
     die();
 }
 
@@ -37,7 +56,7 @@ $configuration
 $readability = new Readability($configuration);
 
 if(!$article_html = file_get_contents($article_url)) {
-    $error_text .=  "Failed to get the article :( <br>";
+    $error_text .=  tr("error_article_fail")." <br>";
 }
 
 try {
@@ -74,12 +93,12 @@ function clean_str($str) {
  <body>
     <p>
         <form action="/read.php" method="get">
-        <a href="/">Back to <b><font color="#008000">Frog</font><font color="000000">Find!</font></a></b> | Browsing URL: <input type="text" size="38" name="a" value="<?php echo $article_url ?>">
-        <input type="submit" value="Go!">
+        <a href="/?lg=<?= $_GET['lg'] ?>"><?= tr('back_to_frogfind'); ?> <b><font color="#008000">Frog</font><font color="000000">Find!</font></a></b> | <?= tr('browsing_url'); ?>: <input type="text" size="38" name="a" value="<?php echo $article_url ?>">
+        <input type="submit" value="<?= tr('go'); ?>">
         </form>
     </p>
     <hr>
-    <h1><?php echo clean_str($readability->getTitle());?></h1>
+    <h1><?php echo localeEncode(clean_str($readability->getTitle()));?></h1>
     <p> <?php
         $img_num = 0;
         $imgline_html = "View page images:";
@@ -95,6 +114,6 @@ function clean_str($str) {
         }
     ?></small></p>
     <?php if($error_text) { echo "<p><font color='red'>" . $error_text . "</font></p>"; } ?>
-    <p><font size="4"><?php echo $readable_article;?></font></p>
+    <p><font size="4"><?php echo localeEncode($readable_article);?></font></p>
  </body>
  </html>
