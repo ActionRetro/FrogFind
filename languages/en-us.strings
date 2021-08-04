@@ -1,0 +1,21 @@
+"encoding" = "ISO-8859-1";
+"author" = "Sean";
+
+"frogfind_description" = "The Search Engine for Vintage Computers";
+"leap_to" = "Leap to";
+"ribbbit_button" = "Ribbbit!";
+"footer_author" = "Built by Action Retro on YouTube";
+"footer_about" = "Why build such a thing?";
+"footer_powered" = "Powered by DuckDuckGo";
+
+"search_results" = "Search Results for";
+
+%{ Read %}
+"back_to_frogfind" = "Back to";
+"browsing_url" = "Browsing URL";
+"go" = "Go!";
+
+%{ Errors %}
+
+"error_fail_to_fetch" = "Failed to get results, sorry :(";
+"error_not_webpage" = "That's not a web page :(";

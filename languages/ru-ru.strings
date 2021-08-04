@@ -1,0 +1,22 @@
+"encoding" = "Windows-1251";
+"author" = "Vladimir Barinov (veselcraft)";
+
+"frogfind_description" = "Поисковая система для винтажных компьютеров";
+"leap_to" = "Запрос";
+"ribbbit_button" = "Найти!";
+"footer_author" = "Сайт создан YouTube-каналом Action Retro";
+"footer_about" = "Зачем нужна эта штука? (на английском)";
+"footer_powered" = "Работает с помощью DuckDuckGo";
+
+"search_results" = "Результаты поиска для запроса";
+
+%{ Read %}
+"back_to_frogfind" = "Вернуться в";
+"browsing_url" = "Адресная строка";
+"go" = "Перейти!";
+
+%{ Errors %}
+
+"error_fail_to_fetch" = "Не удалось выполнить поиск, извините :c";
+"error_not_webpage" = "Это не веб-страница :(";
+"error_article_fail" = "Не получилось показать страницу :(";
