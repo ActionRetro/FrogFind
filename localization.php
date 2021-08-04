@@ -1,7 +1,7 @@
 <?php
 
 
-class Locale {
+class UILocale {
     protected function parseLang($file): array
     {
         $string = file_get_contents($file);

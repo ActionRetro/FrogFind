@@ -4,7 +4,7 @@ require_once('localization.php');
 
 // Locale things
 
-$locale = new Locale;
+$locale = new UILocale;
 $encoding = $locale->trRaw('encoding', $_GET['lg']);
 
 function tr($string) {
@@ -66,7 +66,7 @@ try {
     $readable_article = str_replace( 'em>', 'i>', $readable_article ); //change <em> to <i>
     
     $readable_article = clean_str($readable_article);
-    $readable_article = str_replace( 'href="http', 'href="/read.php?a=http', $readable_article ); //route links through proxy
+    $readable_article = str_replace( 'href="http', 'href="/read.php?lg=' . $_GET['lg'] . '&a=http', $readable_article ); //route links through proxy
     
 } catch (ParseException $e) {
     $error_text .= 'Sorry! ' . $e->getMessage() . '<br>';
@@ -94,6 +94,7 @@ function clean_str($str) {
     <p>
         <form action="/read.php" method="get">
         <a href="/?lg=<?= $_GET['lg'] ?>"><?= tr('back_to_frogfind'); ?> <b><font color="#008000">Frog</font><font color="000000">Find!</font></a></b> | <?= tr('browsing_url'); ?>: <input type="text" size="38" name="a" value="<?php echo $article_url ?>">
+        <input type="hidden" name="lg" value="<?= $_GET['lg']; ?>">
         <input type="submit" value="<?= tr('go'); ?>">
         </form>
     </p>

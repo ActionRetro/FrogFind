@@ -4,7 +4,7 @@ require_once('localization.php');
 
 // Locale things
 
-$locale = new Locale;
+$locale = new UILocale;
 $encoding = $locale->trRaw('encoding', $_GET['lg']);
 
 function tr($string) {
