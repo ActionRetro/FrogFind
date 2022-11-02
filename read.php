@@ -94,7 +94,7 @@ function clean_str($str) {
             echo  $imgline_html ;
         }
     ?></small></p>
-    <?php if($error_text) { echo "<p><font color='red'>" . $error_text . "</font></p>"; } ?>
+    <?php if($error_text) { echo '<p><font color="red">' . $error_text . '</font></p>'; } ?>
     <p><font size="4"><?php echo $readable_article;?></font></p>
  </body>
  </html>
