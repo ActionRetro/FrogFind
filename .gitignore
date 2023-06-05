@@ -6,3 +6,4 @@ composer.phar
 # composer.lock
 
 *.spc
+.DS_Store
