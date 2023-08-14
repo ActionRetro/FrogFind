@@ -41,13 +41,23 @@ $host = $url['host'];
 $context = stream_context_create(['http' => array('method' => 'HEAD')]);
 $headers = get_headers($article_url, true, $context);
 
-if (!array_key_exists('Content-Type', $headers) || !array_key_exists('Content-Length', $headers)) {
+if (!array_key_exists('Content-Type', $headers)) {
     $error_text .=  "Failed to get the article, its server did not return expected details :( <br>";
 }
 else {
+    // Remove any possible additional data that we don't consider here (ie. charset=X)
+    $contentType = explode(";", $headers['Content-Type'])[0];
+    // Only use the last-provided content type if an array was returned (ie. when there were redirects involved)
+    if (is_array($contentType)) {
+        $contentType = $contentType[count($contentType)-1];
+    }
+
     // Attempt to handle downloads or other mime-types by passing proxying them through.
-    if (!in_array($headers['Content-Type'], $compatible_content_types)) {
-        $filesize = $headers['Content-Length'];
+    if (!in_array($contentType, $compatible_content_types)) {
+        $filesize = 0;
+        if (array_key_exists('Content-Length', $headers)) {
+            $filesize = $headers['Content-Length'];
+        }
 
         // Check if the linked file isn't too large for us to proxy.
         if ($filesize > $proxy_download_max_filesize) {
@@ -56,12 +66,6 @@ else {
             die();
         }
         else {
-            $contentType = $headers['Content-Type'];
-            // Only use the last-provided content type if an array was returned (ie. when there were redirects involved)
-            if (is_array($contentType)) {
-                $contentType = $contentType[count($contentType)-1];
-            }
-
             $filename = basename($url['path']);
 
             // If no filename can be deduced from the URL, set a placeholder filename
