@@ -4,11 +4,18 @@ require_once('vendor/autoload.php');
 $article_url = "";
 $article_html = "";
 $error_text = "";
-$loc = "US";
 
-if( isset( $_GET['loc'] ) ) {
-    $loc = strtoupper($_GET["loc"]);
-}
+// List of Content-Types that we know we can (try to) parse. 
+// Anything else will get piped through directly, if possible.
+$compatible_content_types = [
+    "text/html",
+    "text/plain"
+];
+
+// The maximum allowed filesize for proxy download passthroughs. 
+// Any file larger than this will instead show an error message, with
+// a direct link to the file.
+$proxy_download_max_filesize = 8000000; // ~ 8Mb
 
 if( isset( $_GET['a'] ) ) {
     $article_url = $_GET["a"];
@@ -22,11 +29,57 @@ if (substr( $article_url, 0, 4 ) != "http") {
     die();
 }
 
-$host = parse_url($article_url, PHP_URL_HOST);
+$url = parse_url($article_url);
+$host = $url['host'];
 
-use andreskrey\Readability\Readability;
-use andreskrey\Readability\Configuration;
-use andreskrey\Readability\ParseException;
+// Attempt to figure out what the requested URL content-type may be
+$context = stream_context_create(['http' => array('method' => 'HEAD')]);
+$headers = get_headers($article_url, true, $context);
+
+if (!array_key_exists('Content-Type', $headers) || !array_key_exists('Content-Length', $headers)) {
+    $error_text .=  "Failed to get the article, its server did not return expected details :( <br>";
+}
+else {
+    // Attempt to handle downloads or other mime-types by passing proxying them through.
+    if (!in_array($headers['Content-Type'], $compatible_content_types)) {
+        $filesize = $headers['Content-Length'];
+
+        // Check if the linked file isn't too large for us to proxy.
+        if ($filesize > $proxy_download_max_filesize) {
+            echo 'Failed to proxy file download, it\'s too large. :( <br>';
+            echo 'You can try downloading the file directly: ' . $article_url;
+            die();
+        }
+        else {
+            $contentType = $headers['Content-Type'];
+            // Only use the last-provided content type if an array was returned (ie. when there were redirects involved)
+            if (is_array($contentType)) {
+                $contentType = $contentType[count($contentType)-1];
+            }
+
+            $filename = basename($url['path']);
+
+            // If no filename can be deduced from the URL, set a placeholder filename
+            if (!$filename) {
+                $filename = "download";
+            }
+            
+            // Set the content headers based on the file we're proxying through.
+            header('Content-Type: ' . $contentType);
+            header('Content-Length: ' . $filesize);
+            // Set the content-disposition to encourage the browser to download the file.
+            header('Content-Disposition: attachment; filename="'. $filename . '"');
+
+            // Use readfile 
+            readfile($article_url);
+            die();
+        }
+    }
+}
+
+use fivefilters\Readability\Readability;
+use fivefilters\Readability\Configuration;
+use fivefilters\Readability\ParseException;
 
 $configuration = new Configuration();
 $configuration
@@ -87,7 +140,7 @@ function clean_str($str) {
             //we can only do png and jpg
             if (strpos($image_url, ".jpg") || strpos($image_url, ".jpeg") || strpos($image_url, ".png") === true) {
                 $img_num++;
-                $imgline_html .= " <a href='image.php?loc=" . $loc . "&i=" . $image_url . "'>[$img_num]</a> ";
+                $imgline_html .= " <a href='image.php?i=" . $image_url . "'>[$img_num]</a> ";
             }
         endforeach;
         if($img_num>0) {
