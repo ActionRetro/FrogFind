@@ -32,10 +32,10 @@ $raw_imagey = imagesy($raw_image);
 
 if ($raw_imagex >= $raw_imagey) {
 	$dest_imagex = 300;
-	$dest_imagey = ($raw_imagey / $raw_imagex) * $dest_imagex;
+	$dest_imagey = intval(($raw_imagey / $raw_imagex) * $dest_imagex);
 } else {
 	$dest_imagey = 200;
-	$dest_imagex = ($raw_imagex / $raw_imagey) * $dest_imagey;
+	$dest_imagex = intval(($raw_imagex / $raw_imagey) * $dest_imagey);
 }
 
 $dest_image = imagecreatetruecolor($dest_imagex, $dest_imagey);
