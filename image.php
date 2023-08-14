@@ -1,11 +1,6 @@
 <?php
 
     $url = "";
-    $loc = "US";
-
-    if( isset( $_GET['loc'] ) ) {
-        $loc = strtoupper($_GET["loc"]);
-    }
     
     //get the image url
     if (isset( $_GET['i'] ) ) {
@@ -34,13 +29,13 @@
  
  <html>
  <head>
-     <title>68k.news Image Viewer</title>
+     <title>FrogFind Image Viewer</title>
  </head>
  <body">
-    <small><a href="<?php echo $_SERVER['HTTP_REFERER'] . '?loc=' . strtoupper($loc) ?>">< Back to article</a></small>
+    <small><a href="<?php echo $_SERVER['HTTP_REFERER'] ?>">< Back to previous page</a></small>
     <p><small><b>Viewing image:</b> <?php echo $url ?></small></p>
     <img src="/image_compressed.php?i=<?php echo $url; ?>">
     <br><br>
-    <small><a href="<?php echo $_SERVER['HTTP_REFERER'] . '?loc=' . strtoupper($loc) ?>">< Back to article</a></small>
+    <small><a href="<?php echo $_SERVER['HTTP_REFERER'] ?>">< Back to previous page</a></small>
  </body>
  </html>
