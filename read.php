@@ -24,9 +24,9 @@ if (substr( $article_url, 0, 4 ) != "http") {
 
 $host = parse_url($article_url, PHP_URL_HOST);
 
-use andreskrey\Readability\Readability;
-use andreskrey\Readability\Configuration;
-use andreskrey\Readability\ParseException;
+use fivefilters\Readability\Readability;
+use fivefilters\Readability\Configuration;
+use fivefilters\Readability\ParseException;
 
 $configuration = new Configuration();
 $configuration
