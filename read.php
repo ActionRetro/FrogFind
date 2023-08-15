@@ -140,14 +140,14 @@ function clean_str($str) {
             //we can only do png and jpg
             if (strpos($image_url, ".jpg") || strpos($image_url, ".jpeg") || strpos($image_url, ".png") === true) {
                 $img_num++;
-                $imgline_html .= " <a href='image.php?i=" . $image_url . "'>[$img_num]</a> ";
+                $imgline_html .= ' <a href="image.php?i=' . $image_url . '">[$img_num]</a> ';
             }
         endforeach;
         if($img_num>0) {
             echo  $imgline_html ;
         }
     ?></small></p>
-    <?php if($error_text) { echo "<p><font color='red'>" . $error_text . "</font></p>"; } ?>
+    <?php if($error_text) { echo '<p><font color="red">' . $error_text . '</font></p>'; } ?>
     <p><font size="4"><?php echo $readable_article;?></font></p>
  </body>
  </html>

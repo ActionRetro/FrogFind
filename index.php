@@ -36,8 +36,8 @@ if(isset( $_GET['q'])) { // if there's a search query, show the results for it
             $result_snippet = explode('">', $result_snippet)[1];
             $result_snippet = explode('</a>', $result_snippet)[0];
 
-            $final_result_html .= "<br><a href='" . $result_link . "'><font size='4'><b>" . $result_title[0] . "</b></font><br><font color='#008000' size='2'>" 
-                                . $result_display_url . "</font></a><br>" . $result_snippet . "<br><br><hr>";
+            $final_result_html .= '<br><a href="' . $result_link . '"><font size=4><b>' . $result_title[0] . '</b></font><br><font color="#008000" size=2>'
+                                . $result_display_url . '</font></a><br>' . $result_snippet . '<br><br><hr>';
         }
     }
 }
