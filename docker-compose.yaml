@@ -2,10 +2,7 @@ version: '3.7'
 services:
 
   web:
-    build:
-      context: .
+    image: ghcr.io/actionretro/frogfind:main
     ports:
       - 8080:8080
-    environment:
-      - SSL_MODE=mixed
     restart: unless-stopped
