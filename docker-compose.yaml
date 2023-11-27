@@ -1,0 +1,8 @@
+version: '3.7'
+services:
+
+  web:
+    image: ghcr.io/actionretro/frogfind:main
+    ports:
+      - 8080:8080
+    restart: unless-stopped
