@@ -9,4 +9,3 @@ services:
     environment:
       - SSL_MODE=mixed
     restart: unless-stopped
-
