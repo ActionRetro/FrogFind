@@ -4,6 +4,7 @@ require_once('vendor/autoload.php');
 $show_results = FALSE;
 $results_html = "";
 $final_result_html = "<hr>";
+$error_text = "";
 
 if(isset( $_GET['q'])) { // if there's a search query, show the results for it
     $query = urlencode($_GET["q"]);
@@ -78,6 +79,7 @@ function clean_str($str) {
     
 <?php } else { // no search query, so show new search ?>
     <br><br><center><h1><font size=7><font color="#008000">Frog</font>Find!</font></h1></center>
+    <center><img src="assets/frogfind.gif" alt="a pixelated cartoon graphic of a fat, lazy, unamused frog with a keyboard in front of them, awaiting your search query" style="margin: 10px 0;"></center>
     <center><h3>The Search Engine for Vintage Computers</h3></center>
     <br><br>
     <center>
@@ -88,6 +90,7 @@ function clean_str($str) {
     <br><br><br>
     <small><center>Built by <b><a href="https://youtube.com/ActionRetro">Action Retro</a></b> on YouTube | <a href="about.php">Why build such a thing?</a></center><br>
     <small><center>Powered by DuckDuckGo</center></small>
+    <small><center>v1.2</center></small>
 </form>
 </form>
 
