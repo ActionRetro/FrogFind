@@ -84,12 +84,11 @@ function clean_str($str) {
     <form action="/" method="get">
     Leap to: <input type="text" size="30" name="q"><br>
     <input type="submit" value="Ribbbit!">
+	</form>
     </center>
     <br><br><br>
-    <small><center>Built by <b><a href="https://youtube.com/ActionRetro">Action Retro</a></b> on YouTube | <a href="about.php">Why build such a thing?</a></center><br>
+    <small><center>Built by <b><a href="https://youtube.com/ActionRetro">Action Retro</a></b> on YouTube | <a href="about.php">Why build such a thing?</a></center><br></small>
     <small><center>Powered by DuckDuckGo</center></small>
-</form>
-</form>
 
 <?php } ?>
 
