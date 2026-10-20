@@ -6,3 +6,7 @@ composer.phar
 /vendor/
 *.spc
 .DS_Store
+
+# FrogFind settings (holds the link-signing secret)
+config.php
+/cache/

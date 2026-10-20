@@ -1,0 +1,8 @@
+# FrogFind's search results and reader pages are made on the fly from other
+# people's sites. Please don't crawl them.
+User-agent: *
+Disallow: /read.php
+Disallow: /image.php
+Disallow: /image_compressed.php
+Disallow: /?q=
+Disallow: /index.php?q=
